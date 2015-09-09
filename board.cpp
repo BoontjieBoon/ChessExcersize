@@ -21,6 +21,19 @@ Board::~Board()
 
 void Board::resetBoard()
 {
+    // initialise pieces 2D vector with NULL pointers
+    for (int i = 0; i < NUM_RANKS; i++)
+    {
+        for (int j = 0; j < NUM_FILES ; j++)
+        {
+            Piece* piece = getPiece(Position(i, j));
+            if (piece)
+            {
+                delete piece;
+            }
+        }
+    }
+
     // fill board with pieces according to chess setup rules
     for (int i = 0; i < NUM_RANKS; ++i)
     {
@@ -69,7 +82,7 @@ void Board::resetBoard()
     return;
 }
 
-void Board::placePiece(Piece *piece, Position position)
+void Board::placePiece(Piece* piece, Position position)
 {
     if (isValidPosition(position))
     {

@@ -230,18 +230,18 @@ QImage ChessBoardWidget::getPieceImage(Piece *piece)
 
         switch (piece->getType())
         {
-            case KING: path += "king"; break;
-            case QUEEN: path += "queen"; break;
-            case BISHOP: path += "bishop"; break;
-            case KNIGHT: path += "knight"; break;
-            case ROOK: path += "rook"; break;
-            case PAWN: path += "pawn"; break;
+        case KING: path += "king"; break;
+        case QUEEN: path += "queen"; break;
+        case BISHOP: path += "bishop"; break;
+        case KNIGHT: path += "knight"; break;
+        case ROOK: path += "rook"; break;
+        case PAWN: path += "pawn"; break;
         }
 
         switch (piece->getSide())
         {
-            case WHITE: path += "_w.png"; break;
-            case BLACK: path += "_b.png"; break;
+        case WHITE: path += "_w.png"; break;
+        case BLACK: path += "_b.png"; break;
         }
         if (image.load(path))
         {

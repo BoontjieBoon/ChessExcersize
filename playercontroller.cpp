@@ -4,8 +4,14 @@
 #include "move.h"
 
 PlayerController::PlayerController()
-    :PlayerController(HUMAN, COMPUTER)
 {
+    white.setSide(WHITE);
+    black.setSide(BLACK);
+
+    white.setType(HUMAN);
+    white.setType(COMPUTER);
+
+    activePlayer = &white;
 }
 
 PlayerController::PlayerController(PlayerType whiteType, PlayerType blackType)
