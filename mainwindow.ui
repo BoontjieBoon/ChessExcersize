@@ -27,20 +27,38 @@
     <property name="title">
      <string>Game</string>
     </property>
-    <addaction name="actionNew_Game"/>
+    <widget class="QMenu" name="menuNew_Game">
+     <property name="title">
+      <string>New Game</string>
+     </property>
+     <addaction name="action2_Player"/>
+     <addaction name="actionWhite_vs_PC"/>
+     <addaction name="actionBlack_vs_PC"/>
+    </widget>
+    <addaction name="menuNew_Game"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <addaction name="menuGame"/>
   </widget>
-  <action name="actionNew_Game">
-   <property name="text">
-    <string>New Game</string>
-   </property>
-  </action>
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="action2_Player">
+   <property name="text">
+    <string>2 Player</string>
+   </property>
+  </action>
+  <action name="actionWhite_vs_PC">
+   <property name="text">
+    <string>White vs PC</string>
+   </property>
+  </action>
+  <action name="actionBlack_vs_PC">
+   <property name="text">
+    <string>Black vs PC</string>
    </property>
   </action>
  </widget>

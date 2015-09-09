@@ -4,14 +4,19 @@
 #include "move.h"
 
 Game::Game()
+    :Game(HUMAN, COMPUTER)
 {
-    playerOne.setSide(WHITE);
-    playerTwo.setSide(BLACK);
+}
 
-    playerOne.setType(HUMAN);
-    playerTwo.setType(COMPUTER);
+Game::Game(PlayerType whiteType, PlayerType blackType)
+{
+    white.setSide(WHITE);
+    black.setSide(BLACK);
 
-    activePlayer = &playerOne;
+    white.setType(whiteType);
+    white.setType(blackType);
+
+    activePlayer = &white;
 }
 
 Game::~Game()
@@ -19,15 +24,23 @@ Game::~Game()
 
 }
 
+void Game::reset(PlayerType whiteType, PlayerType blackType)
+{
+    white.setType(whiteType);
+    black.setType(blackType);
+
+    activePlayer = &white;
+}
+
 Player *Game::changeActivePlayer()
 {
-    if (activePlayer == &playerOne)
+    if (activePlayer == &white)
     {
-        activePlayer = &playerTwo;
+        activePlayer = &black;
     }
     else
     {
-        activePlayer = &playerOne;
+        activePlayer = &white;
     }
 
     return activePlayer;

@@ -57,9 +57,19 @@ void MainWindow::on_actionQuit_triggered()
     qApp->quit();
 }
 
-void MainWindow::on_actionNew_Game_triggered()
+void MainWindow::on_action2_Player_triggered()
 {
-    cbw->reset();
+    cbw->reset(HUMAN, HUMAN);
+}
+
+void MainWindow::on_actionWhite_vs_PC_triggered()
+{
+    cbw->reset(HUMAN, COMPUTER);
+}
+
+void MainWindow::on_actionBlack_vs_PC_triggered()
+{
+    cbw->reset(COMPUTER, HUMAN);
 }
 
 void MainWindow::activePlayerChanged(Player player)

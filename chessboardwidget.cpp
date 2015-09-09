@@ -52,13 +52,13 @@ QSize ChessBoardWidget::sizeHint() const
     return QSize(this->board.getNumFiles() * squareWidth, this->board.getNumRanks() * squareHeight);
 }
 
-void ChessBoardWidget::reset()
+void ChessBoardWidget::reset(PlayerType white, PlayerType black)
 {
     board.resetBoard();
+    game.reset(white, black);
 
-    // make sure active player is white
-    if (game.getActivePlayer()->getSide() == BLACK)
-        game.changeActivePlayer();
+    if (white == COMPUTER)
+        makeAutomaticMove();
 
     // force redraw
     update();
@@ -110,37 +110,7 @@ void ChessBoardWidget::mousePressEvent(QMouseEvent *event)
                 // automatically do computer move
                 if (newActivePlayer->getType() == COMPUTER)
                 {
-                    QVector<Move> allMoves = board.getMovesForSide(newActivePlayer->getSide());
-                    qsrand(QTime::currentTime().msec());
-
-                    if (allMoves.length() > 0)
-                    {
-                        QVector<Move> takeMoves;
-                        for (int j = 0; j < allMoves.length(); j++)
-                        {
-                            Piece *piece = board.getPiece(allMoves[j].getStop());
-                            if ((piece) && (newActivePlayer->getSide() != piece->getSide()))
-                            {
-                                takeMoves.append(allMoves[j]);
-                            }
-                        }
-
-                        Move aiMove;
-                        if (takeMoves.length() > 0)
-                        {
-                            aiMove = takeMoves[qrand() % takeMoves.length()];
-                        }
-                        else
-                        {
-                            aiMove = allMoves[qrand() % allMoves.length()];
-                        }
-
-                        board.movePiece(aiMove.getStart(), aiMove.getStop());
-
-                        emit activePlayerChanged(*game.changeActivePlayer());
-                    }
-
-                    emit stateChanged(board.getGameState(game.getActivePlayer()->getSide()));
+                    makeAutomaticMove();
                 }
             }
         }
@@ -279,4 +249,39 @@ QImage ChessBoardWidget::getPieceImage(Piece *piece)
         }
     }
     return image;
+}
+
+void ChessBoardWidget::makeAutomaticMove()
+{
+    QVector<Move> allMoves = board.getMovesForSide(game.getActivePlayer()->getSide());
+    qsrand(QTime::currentTime().msec());
+
+    if (allMoves.length() > 0)
+    {
+        QVector<Move> takeMoves;
+        for (int j = 0; j < allMoves.length(); j++)
+        {
+            Piece *piece = board.getPiece(allMoves[j].getStop());
+            if ((piece) && (game.getActivePlayer()->getSide() != piece->getSide()))
+            {
+                takeMoves.append(allMoves[j]);
+            }
+        }
+
+        Move aiMove;
+        if (takeMoves.length() > 0)
+        {
+            aiMove = takeMoves[qrand() % takeMoves.length()];
+        }
+        else
+        {
+            aiMove = allMoves[qrand() % allMoves.length()];
+        }
+
+        board.movePiece(aiMove.getStart(), aiMove.getStop());
+
+        emit activePlayerChanged(*game.changeActivePlayer());
+
+        emit stateChanged(board.getGameState(game.getActivePlayer()->getSide()));
+    }
 }

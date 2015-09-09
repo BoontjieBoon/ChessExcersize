@@ -9,11 +9,13 @@ class Game
 private:
     GameState state;
     Player* activePlayer;
-    Player playerOne;
-    Player playerTwo;
+    Player white;
+    Player black;
 public:
     Game();
+    Game(PlayerType whiteType, PlayerType blackType);
     ~Game();
+    void reset(PlayerType whiteType, PlayerType blackType);
     Player *changeActivePlayer();
     Player *getActivePlayer();
 };

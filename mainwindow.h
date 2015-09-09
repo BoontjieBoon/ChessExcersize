@@ -24,7 +24,10 @@ public:
 
 private slots:
     void on_actionQuit_triggered();
-    void on_actionNew_Game_triggered();
+    void on_action2_Player_triggered();
+    void on_actionWhite_vs_PC_triggered();
+    void on_actionBlack_vs_PC_triggered();
+
     void activePlayerChanged(Player player);
     void gameStateChanged(GameState state);
 

@@ -19,12 +19,12 @@ class ChessBoardWidget: public QWidget
 {
     Q_OBJECT
 
-public:
+public:    
     ChessBoardWidget(QWidget *parent = 0, QSize size = QSize(800, 800));
     ~ChessBoardWidget();
 
     QSize sizeHint() const;
-    void reset();
+    void reset(PlayerType white, PlayerType black);
 
 protected:
     void mousePressEvent(QMouseEvent *event);
@@ -35,6 +35,8 @@ private:
     QImage getPieceImage(Piece* piece);
     QColor *getSquareColour(Position position);
     void setSquareColour(Position position, QColor * colour);
+
+    void makeAutomaticMove();
 
     int squareWidth;
     int squareHeight;
