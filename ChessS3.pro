@@ -15,22 +15,22 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     chessboardwidget.cpp \
-    game.cpp \
     piece.cpp \
     player.cpp \
     position.cpp \
     board.cpp \
-    move.cpp
+    move.cpp \
+    playercontroller.cpp
 
 HEADERS  += mainwindow.h \
     chessboardwidget.h \
     enums.h \
-    game.h \
     piece.h \
     player.h \
     position.h \
     board.h \
-    move.h
+    move.h \
+    playercontroller.h
 
 FORMS    += mainwindow.ui
 

@@ -1,14 +1,14 @@
-#include "game.h"
+#include "playercontroller.h"
 #include "piece.h"
 #include "enums.h"
 #include "move.h"
 
-Game::Game()
-    :Game(HUMAN, COMPUTER)
+PlayerController::PlayerController()
+    :PlayerController(HUMAN, COMPUTER)
 {
 }
 
-Game::Game(PlayerType whiteType, PlayerType blackType)
+PlayerController::PlayerController(PlayerType whiteType, PlayerType blackType)
 {
     white.setSide(WHITE);
     black.setSide(BLACK);
@@ -19,12 +19,12 @@ Game::Game(PlayerType whiteType, PlayerType blackType)
     activePlayer = &white;
 }
 
-Game::~Game()
+PlayerController::~PlayerController()
 {
 
 }
 
-void Game::reset(PlayerType whiteType, PlayerType blackType)
+void PlayerController::reset(PlayerType whiteType, PlayerType blackType)
 {
     white.setType(whiteType);
     black.setType(blackType);
@@ -32,7 +32,7 @@ void Game::reset(PlayerType whiteType, PlayerType blackType)
     activePlayer = &white;
 }
 
-Player *Game::changeActivePlayer()
+Player *PlayerController::changeActivePlayer()
 {
     if (activePlayer == &white)
     {
@@ -46,7 +46,7 @@ Player *Game::changeActivePlayer()
     return activePlayer;
 }
 
-Player *Game::getActivePlayer()
+Player *PlayerController::getActivePlayer()
 {
     return this->activePlayer;
 }

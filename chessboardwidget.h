@@ -10,7 +10,7 @@
 #include <QMouseEvent>
 #include <QPaintEvent>
 
-#include "game.h"
+#include "playercontroller.h"
 #include "board.h"
 #include "position.h"
 #include "enums.h"
@@ -51,7 +51,7 @@ private:
     Position *selectedSquare;
     QVector<Position> targetSquares;
 
-    Game game;
+    PlayerController playerController;
     Board board;
 
 signals:

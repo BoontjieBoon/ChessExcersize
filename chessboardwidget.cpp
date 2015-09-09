@@ -55,7 +55,7 @@ QSize ChessBoardWidget::sizeHint() const
 void ChessBoardWidget::reset(PlayerType white, PlayerType black)
 {
     board.resetBoard();
-    game.reset(white, black);
+    playerController.reset(white, black);
 
     if (white == COMPUTER)
         makeAutomaticMove();
@@ -83,7 +83,7 @@ void ChessBoardWidget::mousePressEvent(QMouseEvent *event)
     int rank = board.getNumRanks() - floor(y / squareHeight) - 1;
 
     Piece* piece = board.getPiece(Position(file,rank));
-    Player *player = game.getActivePlayer();
+    Player *player = playerController.getActivePlayer();
 
     // boolean to check if new selections are allowed
     bool selectable = true;
@@ -101,7 +101,7 @@ void ChessBoardWidget::mousePressEvent(QMouseEvent *event)
 
                 board.movePiece(*selectedSquare, targetSquares[i]);
 
-                Player *newActivePlayer = game.changeActivePlayer();
+                Player *newActivePlayer = playerController.changeActivePlayer();
 
                 emit activePlayerChanged(*newActivePlayer);
 
@@ -167,7 +167,7 @@ void ChessBoardWidget::paintEvent(QPaintEvent *event)
 
             if ((selectedSquare) && (*selectedSquare == Position(i, j)))
             {
-                Player *activePlayer = game.getActivePlayer();
+                Player *activePlayer = playerController.getActivePlayer();
                 Piece *selectedPiece = board.getPiece(Position(i, j));
                 if (activePlayer && selectedPiece)
                 {
@@ -253,7 +253,7 @@ QImage ChessBoardWidget::getPieceImage(Piece *piece)
 
 void ChessBoardWidget::makeAutomaticMove()
 {
-    QVector<Move> allMoves = board.getMovesForSide(game.getActivePlayer()->getSide());
+    QVector<Move> allMoves = board.getMovesForSide(playerController.getActivePlayer()->getSide());
     qsrand(QTime::currentTime().msec());
 
     if (allMoves.length() > 0)
@@ -262,7 +262,7 @@ void ChessBoardWidget::makeAutomaticMove()
         for (int j = 0; j < allMoves.length(); j++)
         {
             Piece *piece = board.getPiece(allMoves[j].getStop());
-            if ((piece) && (game.getActivePlayer()->getSide() != piece->getSide()))
+            if ((piece) && (playerController.getActivePlayer()->getSide() != piece->getSide()))
             {
                 takeMoves.append(allMoves[j]);
             }
@@ -280,8 +280,8 @@ void ChessBoardWidget::makeAutomaticMove()
 
         board.movePiece(aiMove.getStart(), aiMove.getStop());
 
-        emit activePlayerChanged(*game.changeActivePlayer());
+        emit activePlayerChanged(*playerController.changeActivePlayer());
 
-        emit stateChanged(board.getGameState(game.getActivePlayer()->getSide()));
+        emit stateChanged(board.getGameState(playerController.getActivePlayer()->getSide()));
     }
 }

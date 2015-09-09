@@ -1,23 +1,22 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef PLAYERCONTROLLER_H
+#define PLAYERCONTROLLER_H
 
 #include "player.h"
 #include "enums.h"
 
-class Game
+class PlayerController
 {
 private:
-    GameState state;
     Player* activePlayer;
     Player white;
     Player black;
 public:
-    Game();
-    Game(PlayerType whiteType, PlayerType blackType);
-    ~Game();
+    PlayerController();
+    PlayerController(PlayerType whiteType, PlayerType blackType);
+    ~PlayerController();
     void reset(PlayerType whiteType, PlayerType blackType);
     Player *changeActivePlayer();
     Player *getActivePlayer();
 };
 
-#endif // GAME_H
+#endif // PLAYERCONTROLLER_H

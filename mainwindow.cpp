@@ -7,7 +7,7 @@
 #include <QString>
 #include <QSize>
 
-#include "game.h"
+#include "playercontroller.h"
 #include "piece.h"
 #include "chessboardwidget.h"
 
